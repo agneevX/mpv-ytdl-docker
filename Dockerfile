@@ -6,7 +6,7 @@ ARG YTDL_VERSION=2022.05.18
 RUN apk update \
  && apk add --no-cache ca-certificates curl dumb-init python3 mpv alsa-utils \
  # Install youtube-dl
- && curl -Lo /usr/local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/download/${BUILD_VERSION}/yt-dlp \
+ && curl -Lo /usr/local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/download/${YTDL_VERSION}/yt-dlp \
  && chmod a+rx /usr/local/bin/yt-dlp \
  && ln -s /usr/bin/python3 /usr/bin/python \
  && apk del curl
