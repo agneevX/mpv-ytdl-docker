@@ -11,7 +11,7 @@ RUN apk update \
 		mpv \
 		alsa-utils \
  # Install youtube-dl
- && curl -Lo /usr/local/bin/yt-dlp \
+ && curl -s -L -o /usr/local/bin/yt-dlp \
  	https://github.com/yt-dlp/yt-dlp/releases/download/${YTDL_VERSION}/yt-dlp \
  && chmod a+rx /usr/local/bin/yt-dlp \
  && ln -s /usr/bin/python3 /usr/bin/python \
