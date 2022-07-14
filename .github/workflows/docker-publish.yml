@@ -4,11 +4,9 @@ on:
   push:
     branches:
       - master
-      - testing
   pull_request:
     branches:
       - master
-      - testing
 
 env:
   REGISTRY: docker.io
@@ -52,6 +50,6 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          platforms: linux/amd64,linux/arm64
-          tags: docker.io/agneev/mpv-ytdl-docker:testing #${{ steps.meta.outputs.tags }}
+          platforms: linux/amd64,linux/arm64,linux/arm-v7
+          tags: docker.io/agneev/mpv-ytdl:latest
           labels: ${{ steps.meta.outputs.labels }}
