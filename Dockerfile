@@ -18,4 +18,4 @@ RUN apk update \
 	&& apk del curl \
 	&& rm -rf /var/cache/apk/*
 
-ENTRYPOINT mpv
+CMD mpv
