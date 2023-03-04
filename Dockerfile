@@ -2,7 +2,7 @@
 
 FROM alpine:latest
 
-ARG YTDLP_VERSION=2022.06.29
+ARG YTDLP_VERSION=2023.03.03
 
 RUN apk update \
 	&& apk add --no-cache \
