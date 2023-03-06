@@ -5,13 +5,11 @@ on:
     branches:
       - master
       - testing
+      - lofi
+
   pull_request:
     branches:
       - master
-
-env:
-  REGISTRY: docker.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
@@ -28,10 +26,16 @@ jobs:
           fetch-depth: 0
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
 
-      - name: Setup Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: docker.io/agneev/mpv-ytdl
 
       - name: Log into Docker Hub
         uses: docker/login-action@v2
@@ -39,18 +43,15 @@ jobs:
           username: ${{ secrets.DH_USER }}
           password: ${{ secrets.DH_TOKEN }}
 
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
-      - name: Build and push Docker image
-        id: build-and-push
-        uses: docker/build-push-action@v3
+      - name: Build and push
+        uses: docker/build-push-action@v4
         with:
           context: .
-          push: ${{ github.event_name != 'pull_request' }}
           platforms: linux/amd64,linux/arm64,linux/arm/v7
-          tags: docker.io/${{ secrets.DH_USER }}/mpv-ytdl:latest
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+
+
+
