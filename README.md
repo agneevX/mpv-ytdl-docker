@@ -1,2 +1,7 @@
 # mpv-ytdl-docker
-Dockerfiles for mpv+ytdl image
+
+Dockerfile for image with mpv and ytdl
+
+```text
+docker pull agneev/mpv-ytdl
+```
