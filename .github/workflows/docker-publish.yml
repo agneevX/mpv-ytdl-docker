@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-      - testing
-      - lofi
 
   pull_request:
     branches:
