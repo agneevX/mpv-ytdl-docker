@@ -47,9 +47,11 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ if eq(github.ref, 'refs/heads/master')
-                    }}latest,master
-                 ${{ else }}
-                    ${{ github.ref_slug }}
-                ${{ endif }}
+          tags: |
+            ${{ if eq(github.ref, 'refs/heads/master') }}
+              latest
+              master
+            ${{ else }}
+              ${{ github.ref_slug }}
+            ${{ endif }}
           labels: ${{ steps.meta.outputs.labels }}
