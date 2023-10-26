@@ -1,6 +1,6 @@
 FROM python:alpine
 
-ENV YTDLP_VERSION=2023.09.24
+ENV YTDLP_VERSION=2023.10.13
 
 RUN apk update \
         && apk add --no-cache mpv alsa-utils \
